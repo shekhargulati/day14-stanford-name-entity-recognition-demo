@@ -11,6 +11,6 @@ public class PingResource {
     @GET
     @Produces(value = "application/json")
     public String ping() {
-        return "{'ping': 'pong'}";
+        return "{'ping': 'pong!!'}";
     }
 }
