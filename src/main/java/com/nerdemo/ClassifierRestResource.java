@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 
 @Path("/classify")
@@ -28,10 +29,8 @@ public class ClassifierRestResource {
         for (List<CoreLabel> coreLabels : classify) {
             for (CoreLabel coreLabel : coreLabels) {
                 String word = coreLabel.word();
-                String answer = coreLabel.ner();
-                if(answer != null){
-                    results.add(new Result(word, answer));
-                }
+                String answer = coreLabel.get(CoreAnnotations.AnswerAnnotation.class);
+                results.add(new Result(word, answer));
             }
         }
         return results;
