@@ -30,7 +30,10 @@ public class ClassifierRestResource {
             for (CoreLabel coreLabel : coreLabels) {
                 String word = coreLabel.word();
                 String answer = coreLabel.get(CoreAnnotations.AnswerAnnotation.class);
-                results.add(new Result(word, answer));
+                if(!"O".equals(answer)){
+                    results.add(new Result(word, answer));
+                }
+                
             }
         }
         return results;
